@@ -1,0 +1,26 @@
+<h1>New Appointment</h1>
+<div id="form">
+  <form (submit)="createAppt()" #addAppt='ngForm'>
+    <div id="date-time">
+      Date:
+      <input type="date" name="date" required [(ngModel)]='newAppt.date' #date='ngModel'>
+
+      <span *ngIf="date.invalid && date.touched" class="error">Please select a future date.
+  </span> 
+  Time:
+      <input type="time" name="time" min="8:00am" max="5:00pm"  [(ngModel)]='newAppt.time' #time='ngModel'>
+    </div>
+    <span *ngIf="time.invalid && time.touched" class="error">Please select a time for your appointment that is between 8:00am and 5:00pm.
+  </span>
+    <h5>
+      Complaint:
+      <textarea rows="8" cols="80" name="complaint" required minlength="10" [(ngModel)]='newAppt.complaint' #complaint='ngModel'>   
+    </textarea>
+    </h5>
+    <span *ngIf="complaint.invalid && complaint.touched" class="error">Please describe your complaint using at least 10 characters.</span>
+    <p>
+      <button type="button" class="button" (click)="cancel()">Cancel</button>
+      <input type="submit" value="Add Appointment" class="button" [disabled]='addAppt.invalid'>
+    </p>
+  </form>
+</div>
